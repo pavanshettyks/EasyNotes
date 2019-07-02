@@ -45,7 +45,7 @@ Installl and link React Native text detector
 
 ### Errors and resolvation stratergy :
     
-    1. React Native Camera issue
+#####  1. React Native Camera issue
 
     ```
      Could not resolve project :react-native-camera.
@@ -55,7 +55,7 @@ Installl and link React Native text detector
           - generalDebugRuntimeElements
           - mlkitDebugRuntimeElements
     ```
-    solution: goto -> android -> build.gradle
+#####  solution: goto -> android -> build.gradle
 
     ```
     android {
