@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet,Button} from 'react-native'
+import { Text, View, StyleSheet,Button, FlatList} from 'react-native'
 import {connect} from 'react-redux';
-import {Overlay } from 'react-native-elements';
+
+import Notes_Row from './Notes_Row';
+import Overlays from './Overlays';
 
 class Home extends Component {
     constructor(){
@@ -16,13 +18,20 @@ class Home extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-            <Text style={styles.welcome}>{this.props.data}</Text>
-            <Button title= "overlay" onPress ={ ()=> { this.setState({isVisible:true })}} />
-            <Button title = "try" onPress = { this.goToCam }/> 
-            
-              
-            <Button title = "tryValue" onPress = { ()=> this.props.changeTextValue(this.state.daa)}/>
+          <View style={styles.container}>
+
+              <View>
+                  <Text style={styles.welcome}>Easy Notes</Text>
+                  <Button title= "Camera" onPress ={  this.goToCam } />
+                  <Button title = "New Note" onPress = { ()=> this.props.newNote() }/> 
+              </View>
+              <View style= {styles.rowsContainer}>
+                    <FlatList data = {this.props.notes }
+                                        renderItem = { ({item}) => <Notes_Row {...item} /> }
+                                        keyExtractor={(item, index) => index.toString()}
+                                        />
+              </View>
+              <Overlays/>
           </View>
         ) 
     }
@@ -33,6 +42,7 @@ export default connect(mapStateToProps,mapDispatcherToAction)(Home);
 function mapDispatcherToAction(dispatch){
     return {
         changeText: () => dispatch({ type: 'changeTexts' }),
+        newNote: () => dispatch({ type: 'newNote' }),
         changeTextValue: (test) => dispatch({ type: 'changeTextValues', payload: test }),
     }
 
@@ -40,16 +50,22 @@ function mapDispatcherToAction(dispatch){
 
 function mapStateToProps(state) {
     return {
-    data: state.data
+    data: state.data,
+    notes: state.notes,
     }
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      
       backgroundColor: '#F5FCFF',
+    },
+    rowsContainer:{
+      flex: 8,
+      backgroundColor:"#b7b2bb",
+      paddingBottom: 4
+
     },
     welcome: {
       fontSize: 20,

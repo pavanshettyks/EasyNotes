@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Alert,  Text, View, TextInput , ScrollView,StyleSheet, KeyboardAvoidingView} from 'react-native'
+import { Alert,  Text, View, TextInput , ScrollView,StyleSheet} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Overlay,Button, } from 'react-native-elements';
+import RNTextDetector from 'react-native-text-detector';
 
 export class Camera extends Component {
     constructor(){
@@ -12,9 +13,31 @@ export class Camera extends Component {
             data:"pks boooooooooom \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n boooo \n \n \n \n \n \n \n \n \n \n \n  \n\n boonm \n boooooooooom \n boonm \n boooooooooom \n boonm \n "
             }
         }
-    click = () => {
-        this.setState({isVisible:!this.state.isVisible});
-    }
+
+    click = async () => {
+        Alert.alert("te1t");
+
+        try {
+          const options = {
+            quality: 0.8,
+            base64: true,
+            skipProcessing: true,
+          };
+          const { uri } = await this.camera.takePictureAsync(options);
+          const visionResp = await RNTextDetector.detectFromUri(uri);
+        //  this.props.store.memoStore.addItem(visionResp);
+          console.log('visionResp', visionResp);
+          
+            } catch (e) {
+          console.warn(e);
+        }
+      
+        //memoStore.loaderFalse();
+        //console.log('try outside', memoStore.loader);
+       // this.setState({isVisible:!this.state.isVisible});
+
+        }
+
     render() {
         return (
             <View style= {{flex:1}}>
