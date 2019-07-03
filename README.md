@@ -39,11 +39,23 @@ Installl and link React Native text detector
 
 `react-native link react-native-text-detector `
 
+Installl and link React Native Elements
 
+`npm i react-native-elements --save`
 
-###############################
+` npm i --save react-native-vector-icons`
+
+` react-native link react-native-vector-icons`
+
+` react-native link react-native-elements`
 
 ### Errors and resolvation stratergy :
+
+```
+clean grdadlle and build:  cd android
+                          ./gradlew clean
+    
+````
     
 #####  1. React Native Camera issue
 
@@ -70,6 +82,8 @@ Installl and link React Native text detector
 
 
 #########################
+https://medium.com/wix-engineering/the-full-react-native-layout-cheat-sheet-a4147802405c
+
 https://blog.nativebase.io/text-recognition-app-using-react-native-3537ccecda6  
 
 https://www.coursera.org/learn/algorithms-divide-conquer  
@@ -97,6 +111,3 @@ new RNTextDetectorPackage() in MainApplication.java under
  https://www.toptal.com/react-native/react-native-camera-tutorial
 
 
- react-native link react-native-fs
- npm install --save accordion-collapse-react-native
- react-native link accordion-collapse-react-native

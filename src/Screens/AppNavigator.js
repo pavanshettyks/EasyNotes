@@ -9,7 +9,9 @@ const RootStack = createStackNavigator(
     {
       Home: {
                 screen: Home,
-                
+                navigationOptions: {
+                    header: null,
+                    }
               },
       Camera: {
                   screen: Camera,
@@ -20,7 +22,7 @@ const RootStack = createStackNavigator(
     
     },
     {
-      initialRouteName: 'Home',
+      initialRouteName: 'Camera',
     }
   );
 
