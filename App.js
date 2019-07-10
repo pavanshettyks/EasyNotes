@@ -10,14 +10,22 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import AppNavigator from './src/Screens/AppNavigator';
 import {Provider} from 'react-redux';
-import store from './src/store';
+import {store,persistor} from './src/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import SplashScreen from 'react-native-splash-screen'
 
 export default class App extends Component {
+  componentDidMount() {
+      SplashScreen.hide();
+  }
   render() {
     return (
     
      <Provider store = {store}> 
-          <AppNavigator />
+              <PersistGate loading={null} persistor={persistor}>
+                    <AppNavigator />
+              </PersistGate>
+          
     </Provider>
     
    

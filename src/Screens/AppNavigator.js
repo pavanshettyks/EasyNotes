@@ -22,7 +22,7 @@ const RootStack = createStackNavigator(
     
     },
     {
-      initialRouteName: 'Camera',
+      initialRouteName: 'Home',
     }
   );
 

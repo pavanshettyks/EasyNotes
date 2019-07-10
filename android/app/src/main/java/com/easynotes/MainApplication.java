@@ -3,6 +3,8 @@ package com.easynotes;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.fetchsky.RNTextDetector.RNTextDetectorPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -27,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
+            new AsyncStoragePackage(),
             new RNTextDetectorPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
@@ -47,6 +51,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+     
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }

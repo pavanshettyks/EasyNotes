@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet,Button, FlatList} from 'react-native'
+import { Text, View, StyleSheet, FlatList} from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
-
+import {Button } from 'react-native-elements';
 import Notes_Row from './Notes_Row';
 import Overlays from './Overlays';
 
@@ -22,8 +23,12 @@ class Home extends Component {
 
               <View>
                   <Text style={styles.welcome}>Easy Notes</Text>
-                  <Button title= "Camera" onPress ={  this.goToCam } />
-                  <Button title = "New Note" onPress = { ()=> this.props.newNote() }/> 
+                  <View style={{flexDirection:'row',backgroundColor:'#e6ccff',justifyContent:'space-between', paddingLeft:10,paddingRight:20}}>
+                    <Icon name="md-camera" onPress ={this.goToCam} style = {{padding:5, color: 'black'}} size={45} />   
+                    <View style={{justifyContent:'center'}}>
+                    <Button title = "New Note"  onPress = { ()=> this.props.newNote() }/> 
+                    </View>
+                  </View>
               </View>
               <View style= {styles.rowsContainer}>
                     <FlatList data = {this.props.notes }

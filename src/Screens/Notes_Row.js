@@ -11,7 +11,7 @@ export class Notes_Row extends Component {
     }
     
 
-    Edit = () => {
+    viewNotes = () => {
         //Alert.alert(this.props.text);
         overlay = {
             id: this.props.id,
@@ -30,7 +30,7 @@ export class Notes_Row extends Component {
             <View style = {styles.container}>
                 <Text style = {styles.text}> {this.props.header} </Text>
                 <View style ={styles.buttonRow}>
-                        <Button title = "View" buttonStyle= {styles.buttonEdit} onPress ={this.Edit} />
+                        <Button title = "View" buttonStyle= {styles.buttonEdit} onPress ={this.viewNotes} />
                         <Button title = "Delete" buttonStyle= {styles.buttonDelete} onPress ={ this.Delete } />
                 </View>
                 

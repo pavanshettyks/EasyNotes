@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet,ScrollView,Alert,TextInput} from 'react-native'
+import { ToastAndroid,Text, View, StyleSheet,ScrollView,Alert,TextInput} from 'react-native'
 import {Overlay, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -7,21 +7,28 @@ export class Overlays extends Component {
     constructor(props){
         super(props);
         this.state ={
-            isEditable:false,
+            isEditable:true,
         }
     }
 
-   /* componentWillReceiveProps({someProp}) {
-       // Alert.alert("boom");
-        this.setState({isVisible:true})
-      }*/
     save =() => {
         note ={
             text:this.props.text,
             id:this.props.id,
             header: "Note "+ this.props.id
         }
+        ToastAndroid.show('Note Saved', ToastAndroid.SHORT);
         this.props.saveNote(note)  
+    }
+
+    update =() => {
+        note ={
+            text:this.props.text,
+            id:this.props.id,
+          //  header: "Note "+ this.props.id
+        }
+        ToastAndroid.show('Note Updated', ToastAndroid.SHORT);
+        this.props.updateNote(note)  
     }
 
     render() {
@@ -39,7 +46,7 @@ export class Overlays extends Component {
                         <TextInput
                             multiline={true}
                             numberOfLines={40}
-                            editable = {this.state.isEditable}
+                            editable = {this.props.isEditable||this.props.isNew}
                             style ={styles.textInput}
                             onChangeText={(text) => this.props.ChangeText(text) }
                             value={this.props.text}
@@ -51,8 +58,9 @@ export class Overlays extends Component {
                        
                         <View style={styles.buttonsRow}>
                             <Button title= "Cancel" buttonStyle= {styles.buttonStyle} onPress ={ ()=> this.props.HideOverlays() } />
-               { !this.state.isEditable && <Button title= "Edit" buttonStyle= {styles.buttonStyle} onPress ={ ()=> { this.setState({isEditable:!this.state.isEditable })}} />}
-                            <Button title= "Save" buttonStyle= {styles.buttonStyle} onPress ={ this.save } />
+              { !this.props.isEditable && !this.props.isNew &&  <Button title= "Edit" buttonStyle= {styles.buttonStyle} onPress ={ ()=>  this.props.makeEditable()} />}
+              { this.props.isNew &&  <Button title= "Save" buttonStyle= {styles.buttonStyle} onPress ={ this.save } /> }
+              { this.props.isEditable && !this.props.isNew &&  <Button title= "Update" buttonStyle= {styles.buttonStyle} onPress ={ this.update} />}
                         </View>
                     </View>
                     
@@ -68,6 +76,8 @@ function mapStateToProps(state){
         isVisible: state.Overlay.isVisible,
         text: state.Overlay.text,
         header: state.Overlay.header,
+        isEditable:state.Overlay.isEditable,
+        isNew:state.Overlay.isNew,
         id: state.Overlay.id
     }
 }
@@ -77,6 +87,8 @@ function mapDispatcherToAction(dispatcher){
         HideOverlays: ()=> dispatcher({type:'HideOverlays'}),
         ChangeText: (text)=> dispatcher({type:'ChangeText',text:text}),
         saveNote: (note) => dispatcher({type:'saveNote',note:note}),
+        updateNote: (note) => dispatcher({type:'updateNote',note:note}),
+        makeEditable: () => dispatcher({type:'makeEditable'}),
     }
 }
 

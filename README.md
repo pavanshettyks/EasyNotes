@@ -49,6 +49,11 @@ Installl and link React Native Elements
 
 ` react-native link react-native-elements`
 
+Splash screen:
+
+` npm i react-native-splash-screen --save `
+` react-native link react-native-splash-screen`
+
 ### Errors and resolvation stratergy :
 
 ```
@@ -111,3 +116,4 @@ new RNTextDetectorPackage() in MainApplication.java under
  https://www.toptal.com/react-native/react-native-camera-tutorial
 
 
+https://www.norio.be/android-feature-graphic-generator ---> splash screen generator
