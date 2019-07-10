@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {Button } from 'react-native-elements';
 import Notes_Row from './Notes_Row';
 import Overlays from './Overlays';
+import HeaderOverlay from './HeaderOverlay';
+
 
 class Home extends Component {
     constructor(){
@@ -34,9 +36,11 @@ class Home extends Component {
                     <FlatList data = {this.props.notes }
                                         renderItem = { ({item}) => <Notes_Row {...item} /> }
                                         keyExtractor={(item, index) => index.toString()}
-                                        />
+                                        /> 
               </View>
               <Overlays/>
+              <HeaderOverlay/>
+              
           </View>
         ) 
     }

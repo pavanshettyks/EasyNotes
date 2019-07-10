@@ -9,7 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 
 const initialState = {
-    data: "boooooooooom",
+    
     nextId: 4,
     Overlay: {
         isVisible: false,
@@ -17,6 +17,11 @@ const initialState = {
         isNew:false,
         id: null,
         text: null,
+        header: null,
+    },
+    headerOverlay: {
+        isVisible: false,
+        id: null,
         header: null,
     },
     notes:[{
@@ -52,6 +57,23 @@ const rootReducer = (state = initialState, action ) => {
             updated_notes = state.notes.filter(note => action.id !== note.id
             )
             return { ...state, notes : updated_notes }
+        
+        
+        case 'updateHeader':
+                updated_notes = state.notes.map(note => {
+                    if(action.note.id == note.id){
+                            note.header = action.note.header;
+                    }
+                    return note;
+                })
+                New_Overlay = { 
+                    isVisible: false,
+                    isNew:false,
+                    id: null,
+                    header: null,
+                }
+
+                return { ...state, notes : updated_notes, headerOverlay: New_Overlay  }
         
         case 'newNote':
              New_Overlay = { 
@@ -130,6 +152,23 @@ const rootReducer = (state = initialState, action ) => {
                     isNew:false,
             }
             return { ...state, Overlay: New_Overlay  }
+        
+        case 'showHeaderOverlays':
+                New_Overlay = { 
+                    id: action.HeaderOverlay.id,
+                    header: action.HeaderOverlay.header,
+                    isVisible: true,
+                }
+                return { ...state, headerOverlay: New_Overlay  }
+        
+        case 'HideHeaderOverlays':
+                New_Overlay = { 
+                    isVisible: false,
+                    isNew:false,
+                    id: null,
+                    header: null,
+                }
+                return { ...state, headerOverlay: New_Overlay  }
 
         case 'ChangeText':
             New_Overlay = { 
@@ -138,6 +177,14 @@ const rootReducer = (state = initialState, action ) => {
                     
             }
             return { ...state, Overlay: New_Overlay  }
+        
+        case 'ChangeHeaderText':
+                New_Overlay = { 
+                        ...state.headerOverlay,
+                        header: action.headerText,
+                        
+                }
+                return { ...state, headerOverlay: New_Overlay  }
 
         case 'makeEditable':
             New_Overlay = { 
